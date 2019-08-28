@@ -1,0 +1,41 @@
+@import "./color.scss";
+@import "./fonts.scss";
+@import "./variables.scss";
+
+.analyze {
+  font-family: "sfPro";
+  padding: 0 $padding-phone;
+}
+
+.photo {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+  &__card {
+    animation: cards 1s ease-in;
+    border-radius: 0.9em;
+
+    background-position: center;
+    background-color: $subtle-blue;
+    box-shadow: 8px 12px 15px 2px rgba(160, 152, 249, 0.3);
+    width: 10em;
+    height: 15em;
+    margin: 2em 1em;
+
+    &:hover {
+      transition: 0.5s;
+      transform: scale(1.1);
+    }
+  }
+}
+
+@keyframes cards {
+  from {
+    opacity: 0;
+    transform: translateY(2em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
