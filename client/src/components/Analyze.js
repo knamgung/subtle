@@ -26,8 +26,7 @@ export default class Analyze extends Component {
         newPictures.push(newImage);
         this.setState(
           {
-            pictures: newPictures,
-            load: false
+            pictures: newPictures
           },
           () => {
             this.props.sketchThis(this.state.pictures);
@@ -35,11 +34,16 @@ export default class Analyze extends Component {
         );
       }.bind(this);
 
+      this.setState({
+        load: false
+      });
+
       reader.readAsDataURL(picture);
     });
   };
   render() {
     const { pictures, load } = this.state;
+    const { startAnalyzing } = this.props;
 
     return (
       <div className="analyze">
@@ -59,26 +63,34 @@ export default class Analyze extends Component {
         ) : (
           <PhotoSet pictures={pictures}></PhotoSet>
         )}
+
+        {pictures.length > 0 ? (
+          <div>
+            <button onClick={startAnalyzing}>Next</button>
+          </div>
+        ) : null}
       </div>
     );
   }
 }
 
-const PhotoSet = ({ pictures }) => {
-  console.log(pictures);
-  let renderPhoto = pictures.map(pic => {
-    console.log(pic);
-    return (
-      <div
-        className="photo__card"
-        style={{
-          backgroundImage: `url(${pic.imgSrc})`,
-          backgroundSize: "contain",
-          backgroundRepeat: "no-repeat"
-        }}
-      ></div>
-    );
-  });
+class PhotoSet extends Component {
+  render() {
+    let { pictures } = this.props;
+    let renderPhoto = pictures.map(pic => {
+      console.log(pic);
+      return (
+        <div
+          className="photo__card"
+          style={{
+            backgroundImage: `url(${pic.imgSrc})`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat"
+          }}
+        ></div>
+      );
+    });
 
-  return <div className="photo">{renderPhoto}</div>;
-};
+    return <div className="photo">{renderPhoto}</div>;
+  }
+}

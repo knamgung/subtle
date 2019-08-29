@@ -2,17 +2,16 @@ import p5 from "p5";
 import "p5/lib/addons/p5.dom";
 import ml5 from "ml5";
 import P5Wrapper from "react-p5-wrapper";
-import test from "./1.jpg";
+import loading from "../assets/gifs/subtle-analyzing.gif";
 
 import React, { Component } from "react";
 
 let pictures = null;
-let updatedPictures = null;
 
 export default class Sketch extends Component {
-  newPicHandler = () => {
-    if (updatedPictures !== null) {
-      this.props.sketchedImage(updatedPictures);
+  newPicHandler = pics => {
+    if (pics !== null) {
+      this.props.sketchedImage(pics, this.props.history);
     }
   };
 
@@ -22,7 +21,13 @@ export default class Sketch extends Component {
     return (
       <div>
         {pictures !== null ? (
-          <P5Wrapper sketch={sketch}></P5Wrapper>
+          <div>
+            <img src={loading}></img>
+            <P5Wrapper
+              sketch={sketch}
+              newPicHandler={this.newPicHandler}
+            ></P5Wrapper>
+          </div>
         ) : (
           <h5>Loading</h5>
         )}
@@ -54,14 +59,12 @@ function sketch(p) {
       console.log("PICS", i);
       img = p.createImg(pics[i].imgSrc, poseReady);
       img.hide();
-    } else if (i === pics.length) {
-      updatedPictures = pics;
-      console.log(updatedPictures);
     }
   };
 
   p.myCustomRedrawAccordingToNewPropsHandler = function(props) {
     if (props.newPicHandler !== null) {
+      console.log("sadsads", props);
       newPicHandler = props.newPicHandler;
     }
   };
@@ -88,15 +91,19 @@ function sketch(p) {
 
     if (poses.length > 0 && i < pics.length) {
       console.log(`Whats I in Draw`, i);
-      p.image(img, 0, 0);
+
       // drawSkeleton(poses);
       // drawKeypoints(poses);
       // p.text(whatShot, 40, 50);
       i++;
       console.log("Reach 3?", i);
-      p.remove();
-      p.setup();
-      p.noLoop();
+      if (i === pics.length) {
+        newPicHandler(pics);
+      } else {
+        p.remove();
+        p.setup();
+        p.noLoop();
+      }
     }
   };
 

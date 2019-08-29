@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import P5Wrapper from "react-p5-wrapper";
+import Results from "./components/Results";
 import Sketch from "./sketches/sketch.js";
 import "./styles/App.css";
 import Navbar from "./components/Navbar";
@@ -9,7 +10,9 @@ import { Route, Switch } from "react-router-dom";
 
 class App extends Component {
   state = {
-    pics: null
+    pics: null,
+    picHistory: null,
+    analyzing: false
   };
 
   sketchThis = pics => {
@@ -18,15 +21,28 @@ class App extends Component {
     });
   };
 
-  sketchedImage = picHistory => {
+  sketchedImage = (picHistory, history) => {
+    console.log(history);
+    this.setState(
+      {
+        picHistory,
+        analyzing: false
+      },
+      () => {
+        history.push("/results");
+      }
+    );
+  };
+
+  startAnalyzing = () => {
     this.setState({
-      picHistory
+      analyzing: true
     });
   };
 
   render() {
-    let { pics } = this.state;
-    console.log("PICA", pics);
+    let { pics, picHistory, analyzing } = this.state;
+    console.log("PICA", pics, picHistory);
     return (
       <div className="App">
         <Navbar></Navbar>
@@ -34,21 +50,37 @@ class App extends Component {
           <Route
             path="/analyze"
             exact
-            render={() => {
+            render={props => {
               return (
                 <div>
-                  <Analyze
-                    sketchThis={this.sketchThis}
-                    sketchedImage={this.sketchedImage}
-                  ></Analyze>
+                  {analyzing ? (
+                    <Sketch
+                      pics={pics}
+                      history={props.history}
+                      sketchedImage={this.sketchedImage}
+                    ></Sketch>
+                  ) : (
+                    <Analyze
+                      sketchThis={this.sketchThis}
+                      startAnalyzing={this.startAnalyzing}
+                    ></Analyze>
+                  )}
                 </div>
               );
             }}
           ></Route>
-          <Route
+          {/* <Route
             path="/sketch"
             render={() => {
-              return <Sketch pics={pics}></Sketch>;
+              return (
+                <Sketch pics={pics} sketchedImage={this.sketchedImage}></Sketch>
+              );
+            }}
+          ></Route> */}
+          <Route
+            path="/results"
+            render={props => {
+              return <Results picHistory={picHistory}></Results>;
             }}
           ></Route>
         </Switch>

@@ -24,7 +24,7 @@ export default class Navbar extends Component {
 
 const ProfileIcon = () => {
   return (
-    <NavLink to="/user" activeClassName="is-active-logo">
+    <NavLink to="/results" activeClassName="is-active-logo">
       <svg
         version="1.1"
         id="Layer_1"
