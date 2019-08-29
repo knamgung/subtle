@@ -41,8 +41,10 @@ function sketch(p) {
   let poseNet;
   let shot;
   let face = ["leftEar", "rightEar", "nose", "leftEye", "rightEye"];
-  let upper = ["leftShoulder", "rightShoulder", "leftHip", "rightHip"];
+  let upper = ["leftShoulder", "rightShoulder"];
   let lower = ["leftKnee", "rightKnee", "leftAnkle", "rightAnkle"];
+
+  let mid = ["leftHip", "rightHip"];
   let filteredPose = [];
   let whatShot;
   let poses = [];
@@ -96,7 +98,7 @@ function sketch(p) {
       // drawKeypoints(poses);
       // p.text(whatShot, 40, 50);
       i++;
-      console.log("Reach 3?", i);
+
       if (i === pics.length) {
         newPicHandler(pics);
       } else {
@@ -109,9 +111,9 @@ function sketch(p) {
 
   function filterShot() {
     console.log("CHECK", poses, i);
-    shot = { face: false, upper: false, lower: false };
+    shot = { face: false, upper: false, lower: false, mid: false };
     filteredPose = poses[0].pose.keypoints.filter(pose => {
-      return pose.score > 0.92;
+      return pose.score > 0.5;
     });
     console.log(`filteredPose`, filteredPose);
     for (let j = 0; j < filteredPose.length; j++) {
@@ -121,6 +123,8 @@ function sketch(p) {
         shot.upper = true;
       } else if (lower.indexOf(filteredPose[j].part) > -1) {
         shot.lower = true;
+      } else if (mid.indexOf(filteredPose[j].part) > -1) {
+        shot.mid = true;
       }
     }
     whichShot(shot);
@@ -130,27 +134,37 @@ function sketch(p) {
     console.log("whats pooshing", pics, shot, i);
 
     if (shot.face) {
-      if (shot.upper && shot.lower) {
+      if (shot.upper && shot.lower && shot.mid) {
         whatShot = "Full Body";
         pics[i].result = "Full Body";
+        pics[i].resultValue = "fullBody";
       } else if (shot.upper) {
         whatShot = "Upper Body";
         pics[i].result = "Upper Body";
+        pics[i].resultValue = "upperBody";
       } else {
         whatShot = "Face Shot";
         pics[i].result = "Face Shot";
+        pics[i].resultValue = "faceShot";
       }
     } else if (shot.upper) {
-      if (shot.lower) {
+      if (shot.mid && shot.lower) {
         whatShot = "Faceless Full Body";
         pics[i].result = "Faceless Full Body";
+        pics[i].resultValue = "facelessFullBody";
       } else {
         whatShot = "Mid Body";
         pics[i].result = "Mid Body";
+        pics[i].resultValue = "midBody";
       }
-    } else {
+    } else if (shot.lower) {
       whatShot = "Lower Body";
       pics[i].result = "Lower Body";
+      pics[i].resultValue = "lowerBody";
+    } else {
+      whatShot = "Undetectable";
+      pics[i].result = "Undetectable";
+      pics[i].resultValue = "undetect";
     }
 
     console.log("Updated", pics, shot);
