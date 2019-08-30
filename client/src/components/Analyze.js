@@ -65,8 +65,10 @@ export default class Analyze extends Component {
         )}
 
         {pictures.length > 0 ? (
-          <div>
-            <button onClick={startAnalyzing}>Next</button>
+          <div className="analyze__start">
+            <button className="analyze__start--cta" onClick={startAnalyzing}>
+              start!
+            </button>
           </div>
         ) : null}
       </div>
@@ -83,9 +85,7 @@ class PhotoSet extends Component {
         <div
           className="photo__card"
           style={{
-            backgroundImage: `url(${pic.imgSrc})`,
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat"
+            backgroundImage: `url(${pic.imgSrc})`
           }}
         ></div>
       );

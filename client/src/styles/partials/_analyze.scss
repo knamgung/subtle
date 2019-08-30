@@ -5,26 +5,48 @@
 .analyze {
   font-family: "sfPro";
   padding: 0 $padding-phone;
+
+  &__start {
+    &--cta {
+      font-family: "gotham";
+      font-size: 1.5em;
+      width: 100%;
+      height: 3em;
+      border-radius: 0.25em;
+      background-color: $subtle-blue;
+      color: white;
+      border: none;
+
+      &:hover {
+        transition: 0.5s;
+        background-color: rgb(105, 105, 255);
+      }
+    }
+    margin: 2em 0 5em 0;
+  }
 }
 
 .photo {
   display: flex;
   flex-flow: wrap;
-  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
   &__card {
     animation: cards 1s ease-in;
     border-radius: 0.9em;
-
+    background-size: cover;
     background-position: center;
     background-color: $subtle-blue;
     box-shadow: 8px 12px 15px 2px rgba(160, 152, 249, 0.3);
-    width: 10em;
-    height: 15em;
-    margin: 2em 1em;
+    width: 47%;
+    height: 12em;
+    margin: 2em 0;
 
     &:hover {
       transition: 0.5s;
       transform: scale(1.1);
+      background-size: contain;
+      background-repeat: no-repeat;
     }
   }
 }
