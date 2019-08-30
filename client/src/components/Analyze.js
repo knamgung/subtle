@@ -51,13 +51,19 @@ export default class Analyze extends Component {
           <h1>Upload Photos</h1>
           <p>upload your photos here</p>
         </div>
-        <ImageUploader
-          withIcon={true}
-          buttonText="Choose images"
-          onChange={this.onDrop.bind(this)}
-          imgExtension={[".jpg", ".png"]}
-          maxFileSize={5242880}
-        />
+        <div className="upload">
+          <div className="upload__button">
+            <ImageUploader
+              withIcon={true}
+              buttonText="Choose images"
+              onChange={this.onDrop.bind(this)}
+              imgExtension={[".jpg", ".jpeg", ".png"]}
+              label={".jpg | .jpeg | .png"}
+              maxFileSize={5242880}
+            />
+          </div>
+        </div>
+
         {load === true ? (
           <h5>Wait</h5>
         ) : (

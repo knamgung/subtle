@@ -19,17 +19,17 @@ export default class Sketch extends Component {
     const { pics } = this.props;
     pictures = pics;
     return (
-      <div>
+      <div className="process">
         {pictures !== null ? (
-          <div>
-            <img src={loading}></img>
+          <div className="process__div">
+            <img className="process__gif" src={loading}></img>
             <P5Wrapper
               sketch={sketch}
               newPicHandler={this.newPicHandler}
             ></P5Wrapper>
           </div>
         ) : (
-          <h5>Loading</h5>
+          <h5>Nothings Being Analyzed</h5>
         )}
       </div>
     );
@@ -55,7 +55,6 @@ function sketch(p) {
 
   p.setup = function() {
     pics = pictures;
-    p.createCanvas(800, 800);
 
     if (i < pics.length) {
       console.log("PICS", i);
@@ -72,7 +71,6 @@ function sketch(p) {
   };
 
   function poseReady() {
-    p.resizeCanvas(img.width, img.height, true);
     poseNet = ml5.poseNet(modelReady);
     poseNet.on("pose", pose => {
       poses = pose;

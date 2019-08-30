@@ -4,6 +4,7 @@ import P5Wrapper from "react-p5-wrapper";
 import Results from "./components/Results";
 import Sketch from "./sketches/sketch.js";
 import "./styles/App.css";
+import History from "./components/History.js";
 import Navbar from "./components/Navbar";
 import Analyze from "./components/Analyze";
 import { Route, Switch } from "react-router-dom";
@@ -12,7 +13,8 @@ class App extends Component {
   state = {
     pics: null,
     picHistory: null,
-    analyzing: false
+    analyzing: false,
+    allAnalyzed: null
   };
 
   sketchThis = pics => {
@@ -34,6 +36,12 @@ class App extends Component {
     );
   };
 
+  saveAnalysis = analysis => {
+    this.setState({
+      allAnalyzed: [analysis]
+    });
+  };
+
   startAnalyzing = () => {
     this.setState({
       analyzing: true
@@ -41,7 +49,7 @@ class App extends Component {
   };
 
   render() {
-    let { pics, picHistory, analyzing } = this.state;
+    let { pics, picHistory, analyzing, allAnalyzed } = this.state;
     console.log("PICA", pics, picHistory);
     return (
       <div className="App">
@@ -69,18 +77,21 @@ class App extends Component {
               );
             }}
           ></Route>
-          {/* <Route
-            path="/sketch"
-            render={() => {
-              return (
-                <Sketch pics={pics} sketchedImage={this.sketchedImage}></Sketch>
-              );
+          <Route
+            path="/history"
+            render={props => {
+              return <History allAnalyzed={allAnalyzed} {...props}></History>;
             }}
-          ></Route> */}
+          ></Route>
           <Route
             path="/results"
             render={props => {
-              return <Results picHistory={picHistory}></Results>;
+              return (
+                <Results
+                  picHistory={picHistory}
+                  saveAnalysis={this.saveAnalysis}
+                ></Results>
+              );
             }}
           ></Route>
         </Switch>

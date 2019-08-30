@@ -1,12 +1,23 @@
 import React, { Component } from "react";
 
 export default class Results extends Component {
+  state = {
+    title: "No Name"
+  };
   render() {
-    let { picHistory } = this.props;
+    let { picHistory, saveAnalysis } = this.props;
+    let { title } = this.state;
     return (
       <div>
         {picHistory ? (
-          <ResultSet picHistory={picHistory}></ResultSet>
+          <div>
+            <ResultSet picHistory={picHistory}></ResultSet>
+            <SaveButtons
+              picHistory={picHistory}
+              saveAnalysis={saveAnalysis}
+              title={title}
+            ></SaveButtons>
+          </div>
         ) : (
           <h5>Please Start an Analysis</h5>
         )}
@@ -64,9 +75,7 @@ const ResultSet = ({ picHistory }) => {
         <div
           className="results__card"
           style={{
-            backgroundImage: `url(${pic.imgSrc})`,
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat"
+            backgroundImage: `url(${pic.imgSrc})`
           }}
         >
           <div className="results__img">
@@ -80,6 +89,7 @@ const ResultSet = ({ picHistory }) => {
 
   return (
     <div className="results">
+      <input></input>
       {bodyParts["faceShot"].length > 0 ? (
         <div className="results__type">
           <div className="results__section">
@@ -161,6 +171,31 @@ const ResultSet = ({ picHistory }) => {
           </div>
         </div>
       ) : null}
+    </div>
+  );
+};
+
+const SaveButtons = ({ picHistory, saveAnalysis, title }) => {
+  let onChange = () => {
+    let analysis = {
+      img: picHistory,
+      date: "Feb",
+      title
+    };
+    saveAnalysis(analysis);
+  };
+
+  return (
+    <div className="button">
+      <button className="button__cancel">Cancel</button>
+      <button
+        className="button__save"
+        onClick={() => {
+          onChange();
+        }}
+      >
+        Save!
+      </button>
     </div>
   );
 };

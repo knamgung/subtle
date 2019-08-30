@@ -12,7 +12,7 @@ export default class Navbar extends Component {
           <NavLink to="/analyze" activeClassName="is-active">
             <h3 className="nav__link nav__link--analyze">analyze</h3>
           </NavLink>
-          <NavLink to="/sketch" activeClassName="is-active">
+          <NavLink to="/history" activeClassName="is-active">
             <h3 className="nav__link nav__link--history">history</h3>
           </NavLink>
           <ProfileIcon></ProfileIcon>

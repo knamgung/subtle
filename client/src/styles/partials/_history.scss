@@ -1,0 +1,61 @@
+@import "./color.scss";
+@import "./fonts.scss";
+@import "./variables.scss";
+
+.history {
+  padding: 0 $padding-phone;
+}
+.prev {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  //   background-color: $subtle-blue;
+  border: $subtle-blue 6px solid;
+  justify-content: center;
+  border-radius: 2em;
+  box-shadow: 8px 12px 15px 2px rgba(160, 152, 249, 0.3);
+  padding: 0 1em;
+  &__info {
+    color: $subtle-blue;
+
+    display: flex;
+    justify-content: space-between;
+    margin: 0 1.3em;
+    padding-bottom: 0.5em;
+    margin-top: 1em;
+    align-items: center;
+    margin-bottom: 1em;
+    border-bottom: rgb(228, 228, 228) 8px dotted;
+  }
+  &__title {
+    font-family: "gotham";
+    display: flex;
+    font-size: 1.2em;
+    margin: 0;
+  }
+
+  &__date {
+    margin: 0;
+    font-size: 0.75em;
+  }
+
+  &__preview {
+    display: flex;
+    flex-flow: wrap;
+  }
+
+  &__img {
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-left: 1em;
+    outline: none;
+    margin-bottom: 2em;
+
+    box-shadow: 2px 2px 10px 0.5px rgba(0, 0, 0, 0.2);
+  }
+}
