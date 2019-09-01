@@ -1,12 +1,26 @@
 import React, { Component } from "react";
+import { graphql, compose } from "react-apollo";
+import { addHistory, getHistories } from "../queries/queries";
+import _ from "lodash";
 
-export default class Results extends Component {
+class Results extends Component {
   state = {
     title: "No Name"
   };
   render() {
     let { picHistory, saveAnalysis } = this.props;
+
+    let data = this.props.getHistories;
+
     let { title } = this.state;
+
+    if (data.loading) {
+      return <h5>Loading</h5>;
+    }
+    if (data.error) {
+      return <h5>Error</h5>;
+    }
+
     return (
       <div>
         {picHistory ? (
@@ -176,26 +190,43 @@ const ResultSet = ({ picHistory }) => {
 };
 
 const SaveButtons = ({ picHistory, saveAnalysis, title }) => {
-  let onChange = () => {
-    let analysis = {
-      img: picHistory,
-      date: "Feb",
-      title
-    };
-    saveAnalysis(analysis);
-  };
-
   return (
     <div className="button">
       <button className="button__cancel">Cancel</button>
-      <button
-        className="button__save"
-        onClick={() => {
-          onChange();
-        }}
-      >
+      <button className="button__save" onClick={() => {}}>
         Save!
       </button>
     </div>
   );
 };
+
+// const SaveButtons = ({ picHistory, saveAnalysis, title }) => {
+//   return (
+//     <Mutation mutation={addHistory}>
+//       {(addResult, { data }) => {
+//         console.log(addResult);
+//         return (
+//           <div className="button">
+//             <button className="button__cancel">Cancel</button>
+//             <button
+//               className="button__save"
+//               onClick={() => {
+//                 console.log(title, picHistory);
+//                 addResult({
+//                   variables: { userId: "1", title: title, resource: picHistory }
+//                 });
+//               }}
+//             >
+//               Save!
+//             </button>
+//           </div>
+//         );
+//       }}
+//     </Mutation>
+//   );
+// };
+
+export default _.flowRight(
+  graphql(addHistory, { name: "addHistory" }),
+  graphql(getHistories, { name: "getHistories" })
+)(Results);

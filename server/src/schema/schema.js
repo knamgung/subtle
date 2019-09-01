@@ -1,6 +1,11 @@
 const graphql = require("graphql");
 const History = require("../models/history");
-const Users = require("../models/img");
+const Images = require("../models/images");
+const UsersDB = require("../models/users");
+
+const mongoose = require("mongoose");
+var db = mongoose.connection;
+const _ = require("lodash");
 
 //Schema defines data on the Graph like object types(book type), relation between
 //these object types and descibes how it can reach into the graph to interact with
@@ -17,12 +22,61 @@ const {
   GraphQLInputObjectType
 } = graphql;
 
+var history = [
+  {
+    title: "Untitled",
+    date: "Sept 5",
+    userId: "1"
+  },
+  {
+    title: "History",
+    date: "Sept 5",
+    userId: "1"
+  },
+  {
+    title: "History",
+    date: "Sept 5",
+    userId: "2"
+  }
+];
+
+var images = [
+  {
+    imgSrc: "src",
+    resultValue: "RV",
+    result: "result",
+    image: "ah",
+    userId: "1",
+    title: "Untitled"
+  },
+  {
+    imgSrc: "1",
+    resultValue: "RV",
+    result: "result",
+    image: "ah",
+    historyId: "1",
+    title: "History"
+  }
+];
+
+var users = [
+  {
+    userId: "1"
+  }
+];
+
 const HistoryType = new GraphQLObjectType({
   name: "history",
   fields: () => ({
     id: { type: GraphQLID },
     title: { type: GraphQLString },
-    img: { type: new GraphQLList(ImgSrcType) }
+    userId: { type: GraphQLString },
+    resource: {
+      type: new GraphQLList(ImgSrcType),
+      resolve(parents, args) {
+        return Images.find({ title: parents.title });
+      }
+    }
   })
 });
 
@@ -31,24 +85,27 @@ const InputHistoryType = new GraphQLInputObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     title: { type: GraphQLString },
-    img: { type: new GraphQLList(InputImgSrcType) }
+    userId: { type: GraphQLString },
+    resource: {
+      type: new GraphQLList(InputImgSrcType),
+      resolve(parents, args) {
+        return Images.find({ title: parents.title });
+      }
+    }
   })
 });
 
 const User = new GraphQLObjectType({
   name: "user",
   fields: () => ({
-    userId: { type: GraphQLID },
+    userId: { type: GraphQLString },
     allHistory: {
-      type: new GraphQLList(AllHistoryType)
+      type: new GraphQLList(HistoryType),
+      resolve(parent, args) {
+        return History.find();
+      }
     }
-  }),
-
-  resolve(parent, arg) {
-    return Users.find(user => {
-      return (user.userId = parent.userId);
-    });
-  }
+  })
 });
 
 const AllHistoryType = new GraphQLObjectType({
@@ -75,8 +132,7 @@ const ImgSrcType = new GraphQLObjectType({
     imgSrc: { type: GraphQLString },
     resultValue: { type: GraphQLString },
     result: { type: GraphQLString },
-    image: { type: GraphQLString },
-    userId: { type: GraphQLID }
+    title: { type: GraphQLString }
   })
 });
 
@@ -85,9 +141,7 @@ const InputImgSrcType = new GraphQLInputObjectType({
   fields: () => ({
     imgSrc: { type: GraphQLString },
     resultValue: { type: GraphQLString },
-    result: { type: GraphQLString },
-    image: { type: GraphQLString },
-    userId: { type: GraphQLID }
+    result: { type: GraphQLString }
   })
 });
 
@@ -97,18 +151,41 @@ const InputImgSrcType = new GraphQLInputObjectType({
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
-    User: {
-      type: User,
-      args: {
-        userId: { type: GraphQLID }
-      },
-      resolve(parent, args) {
-        //Here we define how to get data from database source
+    // User: {
+    //   type: User,
+    //   args: {
+    //     userId: { type: GraphQLID }
+    //   },
+    //   resolve(parent, args) {
+    //     //Here we define how to get data from database source
 
-        //this will return the book with id passed in argument by the user
-        return a.find(b => {
-          return (b.userId = args.userId);
-        });
+    //     //this will return the book with id passed in argument by the user
+    //     return Users.find({ userId: args.userId });
+    //   }
+    // }
+
+    allHistory: {
+      type: GraphQLList(HistoryType),
+      args: { userId: { type: new GraphQLNonNull(GraphQLString) } },
+      resolve(parent, args) {
+        return History.find();
+      }
+    },
+
+    histories: {
+      type: GraphQLList(HistoryType),
+      resolve(parent, args) {
+        return History.find();
+      }
+    },
+
+    users: {
+      type: User,
+      args: { userId: { type: new GraphQLNonNull(GraphQLString) } },
+      resolve(parent, args) {
+        console.log(args.userId);
+
+        return UsersDB.find(args.userId);
       }
     }
   }
@@ -120,26 +197,50 @@ const Mutation = new GraphQLObjectType({
     addUser: {
       type: User,
       args: {
-        userId: { type: new GraphQLNonNull(GraphQLID) }
+        userId: { type: new GraphQLNonNull(GraphQLString) }
       },
 
       resolve(parent, args) {
-        let user = new Users({
+        let user = new UsersDB({
           userId: args.userId,
           allHistory: []
         });
+
         return user.save();
       }
     },
+
     addResult: {
       type: User,
       args: {
-        userId: { type: new GraphQLNonNull(GraphQLID) },
-        historyType: { type: new GraphQLNonNull(InputImgSrcType) }
+        userId: { type: new GraphQLNonNull(GraphQLString) },
+        title: { type: new GraphQLNonNull(GraphQLString) },
+        resource: { type: new GraphQLNonNull(GraphQLList(InputImgSrcType)) }
       },
+
       resolve(parent, args) {
-        let result = new History(args.history);
-        return Users.find({ userId: args.userId });
+        args.resource.map((img, i) => {
+          let resource = new Images({
+            imgSrc: img.imgSrc,
+            resultValue: img.resultValue,
+            result: img.result,
+
+            title: args.title
+          });
+
+          return resource.save();
+        });
+
+        let history = new History({
+          userId: args.userId,
+          title: args.title,
+          date: new Date(),
+          resources: args.resource
+        });
+
+        console.log(args.resource);
+
+        return history.save();
       }
     }
   }

@@ -2,9 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const historySchema = new Schema({
-  id: Number,
+  userId: String,
+  date: String,
   title: String,
-  img: Array
+  resources: Array
 });
 
 module.exports = mongoose.model("History", historySchema);

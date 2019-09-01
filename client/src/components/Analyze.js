@@ -20,7 +20,6 @@ export default class Analyze extends Component {
       var reader = new FileReader();
       reader.onloadend = function() {
         let newImage = {
-          image: picture,
           imgSrc: reader.result
         };
         newPictures.push(newImage);

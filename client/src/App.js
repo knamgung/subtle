@@ -8,6 +8,8 @@ import History from "./components/History.js";
 import Navbar from "./components/Navbar";
 import Analyze from "./components/Analyze";
 import { Route, Switch } from "react-router-dom";
+import { graphql } from "react-apollo";
+import { getHistoryQuery, getHistories } from "./queries/queries";
 
 class App extends Component {
   state = {
@@ -51,6 +53,7 @@ class App extends Component {
   render() {
     let { pics, picHistory, analyzing, allAnalyzed } = this.state;
     console.log("PICA", pics, picHistory);
+    console.log(this.props);
     return (
       <div className="App">
         <Navbar></Navbar>
