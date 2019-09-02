@@ -9,6 +9,11 @@
   align-items: center;
   margin-top: 3em;
 
+  &__title--input {
+    width: 50%;
+    height: 6em;
+  }
+
   &__type {
     animation: rendered 0.5s ease-in;
     display: flex;

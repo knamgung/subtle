@@ -533,6 +533,11 @@
   margin-top: 3em;
 }
 
+.results__title--input {
+  width: 50%;
+  height: 6em;
+}
+
 .results__type {
   -webkit-animation: rendered 0.5s ease-in;
           animation: rendered 0.5s ease-in;

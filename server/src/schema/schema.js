@@ -129,7 +129,6 @@ const InputAllHistoryType = new GraphQLInputObjectType({
 const ImgSrcType = new GraphQLObjectType({
   name: "images",
   fields: () => ({
-    imgSrc: { type: GraphQLString },
     resultValue: { type: GraphQLString },
     result: { type: GraphQLString },
     title: { type: GraphQLString }
@@ -139,7 +138,6 @@ const ImgSrcType = new GraphQLObjectType({
 const InputImgSrcType = new GraphQLInputObjectType({
   name: "imagesInput",
   fields: () => ({
-    imgSrc: { type: GraphQLString },
     resultValue: { type: GraphQLString },
     result: { type: GraphQLString }
   })
@@ -221,10 +219,8 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args) {
         args.resource.map((img, i) => {
           let resource = new Images({
-            imgSrc: img.imgSrc,
             resultValue: img.resultValue,
             result: img.result,
-
             title: args.title
           });
 

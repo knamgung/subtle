@@ -43,7 +43,6 @@ function sketch(p) {
   let face = ["leftEar", "rightEar", "nose", "leftEye", "rightEye"];
   let upper = ["leftShoulder", "rightShoulder"];
   let lower = ["leftKnee", "rightKnee", "leftAnkle", "rightAnkle"];
-
   let mid = ["leftHip", "rightHip"];
   let filteredPose = [];
   let whatShot;

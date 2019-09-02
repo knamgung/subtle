@@ -31,6 +31,40 @@ class History extends Component {
 const HistoryCards = ({ allAnalyzed }) => {
   let allCards = allAnalyzed.map(hist => {
     console.log(hist);
+    let fullCount = hist.resource.filter(info => {
+      return info.resultValue === "fullBody";
+    }).length;
+    let upperCount = hist.resource.filter(info => {
+      return info.resultValue === "upperBody";
+    }).length;
+    let faceCount = hist.resource.filter(info => {
+      return info.resultValue === "faceShot";
+    }).length;
+    let facelessCount = hist.resource.filter(info => {
+      return info.resultValue === "facelessFullBody";
+    }).length;
+    let midCount = hist.resource.filter(info => {
+      return info.resultValue === "midBody";
+    }).length;
+    let lowerCount = hist.resource.filter(info => {
+      return info.resultValue === "lowerBody";
+    }).length;
+
+    let renderResults = info => {
+      let partInfo = hist.resource.filter(obj => {
+        return obj.resultValue === info;
+      });
+      return (
+        <div
+          className={`results__card ${info}`}
+          style={{
+            backgroundImage: `url('./assets/body-part/${info}.png'`
+          }}
+        >
+          <div className="results__img">{partInfo.length}</div>
+        </div>
+      );
+    };
 
     return (
       <div className="prev">
@@ -39,18 +73,15 @@ const HistoryCards = ({ allAnalyzed }) => {
             {hist.title} | {hist.resource.length} Photos
           </h5>
           <p className="prev__date">{hist.date}</p>
-        </div>
-        <div className="prev__preview">
-          {hist.resource.map(img => (
-            <div className="icon">
-              <img
-                style={{
-                  backgroundImage: `url(${img.imgSrc})`
-                }}
-                className="prev__img"
-              ></img>
-            </div>
-          ))}
+          <div className="prev__preview">
+            {renderResults("faceShot")}
+            {renderResults("upperBody")}
+            {renderResults("midBody")}
+            {renderResults("lowerBody")}
+            {renderResults("fullBody")}
+            {renderResults("facelessFullBody")}
+            {renderResults("undetect")}
+          </div>
         </div>
       </div>
     );

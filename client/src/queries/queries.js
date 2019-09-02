@@ -6,10 +6,8 @@ const addHistory = gql`
       allHistory {
         title
         resource {
-          imgSrc
           resultValue
           result
-
           title
         }
       }
@@ -22,10 +20,8 @@ const getHistories = gql`
     histories {
       title
       resource {
-        imgSrc
         resultValue
         result
-
         title
       }
     }
@@ -37,7 +33,6 @@ const getHistoryQuery = gql`
     User(userId: $id) {
       title
       resource {
-        imgSrc
         resultValue
         result
 

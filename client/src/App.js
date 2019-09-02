@@ -93,6 +93,7 @@ class App extends Component {
                 <Results
                   picHistory={picHistory}
                   saveAnalysis={this.saveAnalysis}
+                  {...props}
                 ></Results>
               );
             }}
