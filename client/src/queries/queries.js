@@ -4,6 +4,7 @@ const addHistory = gql`
   mutation($userId: String!, $title: String!, $resource: [imagesInput]!) {
     addResult(userId: $userId, title: $title, resource: $resource) {
       allHistory {
+        date
         title
         resource {
           resultValue
@@ -18,6 +19,7 @@ const addHistory = gql`
 const getHistories = gql`
   {
     histories {
+      date
       title
       resource {
         resultValue
@@ -35,7 +37,6 @@ const getHistoryQuery = gql`
       resource {
         resultValue
         result
-
         title
       }
     }

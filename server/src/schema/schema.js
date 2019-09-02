@@ -71,6 +71,7 @@ const HistoryType = new GraphQLObjectType({
     id: { type: GraphQLID },
     title: { type: GraphQLString },
     userId: { type: GraphQLString },
+    date: { type: GraphQLString },
     resource: {
       type: new GraphQLList(ImgSrcType),
       resolve(parents, args) {
@@ -86,6 +87,7 @@ const InputHistoryType = new GraphQLInputObjectType({
     id: { type: GraphQLID },
     title: { type: GraphQLString },
     userId: { type: GraphQLString },
+    date: { type: GraphQLString },
     resource: {
       type: new GraphQLList(InputImgSrcType),
       resolve(parents, args) {
@@ -217,6 +219,25 @@ const Mutation = new GraphQLObjectType({
       },
 
       resolve(parent, args) {
+        let months = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "June",
+          "July",
+          "Aug",
+          "Sept",
+          "Oct",
+          "Nov",
+          "Dec"
+        ];
+        let newDate = new Date();
+        let formatDate = `${
+          months[newDate.getMonth()]
+        }. ${newDate.getDate()} / ${newDate.getFullYear()}`;
+        console.log(formatDate);
         args.resource.map((img, i) => {
           let resource = new Images({
             resultValue: img.resultValue,
@@ -230,7 +251,7 @@ const Mutation = new GraphQLObjectType({
         let history = new History({
           userId: args.userId,
           title: args.title,
-          date: new Date(),
+          date: formatDate,
           resources: args.resource
         });
 

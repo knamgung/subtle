@@ -46,9 +46,9 @@ export default class Analyze extends Component {
 
     return (
       <div className="analyze">
-        <div>
-          <h1>Upload Photos</h1>
-          <p>upload your photos here</p>
+        <div className="analyze__title">
+          <h1 className="analyze__header">Upload Photos</h1>
+          <p className="analyze__desc">upload your photos here</p>
         </div>
         <div className="upload">
           <div className="upload__button">

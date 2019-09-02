@@ -29,7 +29,11 @@ class Results extends Component {
     return (
       <div>
         {picHistory ? (
-          <div>
+          <div className="result">
+            <div className="result__title">
+              <h1 className="result__header">Results</h1>
+              <p className="result__desc">Save or start a new analysis</p>
+            </div>
             <ResultSet
               picHistory={picHistory}
               setTitle={this.setTitle}
@@ -114,14 +118,14 @@ const ResultSet = ({ picHistory, setTitle, historyData }) => {
   console.log(bodyParts["midBody"].length);
 
   return (
-    <div className="result">
+    <div className="result__final">
       <div className="results__title">
         <input
           className="results__title--input"
           onChange={e => {
             setTitle(e.target.value);
           }}
-          placeholder={`Untitiled ${historyData.histories.length + 1}`}
+          placeholder={`Name your results here!`}
         ></input>
       </div>
       <div className="results">

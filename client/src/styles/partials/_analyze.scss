@@ -6,6 +6,20 @@
   font-family: "sfPro";
   padding: 0 $padding-phone;
 
+  &__title {
+    border-bottom: lightgray solid 1px;
+    margin-bottom: 2em;
+  }
+
+  &__header {
+    margin-bottom: 0;
+  }
+
+  &__desc {
+    margin-top: 0.25em;
+    font-size: 0.9em;
+  }
+
   &__start {
     &--cta {
       font-family: "gotham";

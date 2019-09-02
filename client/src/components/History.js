@@ -20,8 +20,12 @@ class History extends Component {
 
     return (
       <div className="history">
-        <h1>History</h1>
-        <p>Collection of your previous subtle analysis!</p>
+        <div className="history__title">
+          <h1 className="history__header">History</h1>
+          <p className="history__desc">
+            Collection of your previous subtle analysis!
+          </p>
+        </div>
         <HistoryCards allAnalyzed={histories}></HistoryCards>
       </div>
     );
@@ -56,24 +60,26 @@ const HistoryCards = ({ allAnalyzed }) => {
       });
       return (
         <div
-          className={`results__card ${info}`}
+          className={`summary__card ${info}`}
           style={{
             backgroundImage: `url('./assets/body-part/${info}.png'`
           }}
         >
-          <div className="results__img">{partInfo.length}</div>
+          <div className="summary__img">{partInfo.length}</div>
         </div>
       );
     };
 
     return (
       <div className="prev">
-        <div className="prev__info">
+        <div className="prev__header">
           <h5 className="prev__title">
             {hist.title} | {hist.resource.length} Photos
           </h5>
           <p className="prev__date">{hist.date}</p>
-          <div className="prev__preview">
+        </div>
+        <div className="prev__info">
+          <div className="summary">
             {renderResults("faceShot")}
             {renderResults("upperBody")}
             {renderResults("midBody")}
@@ -86,7 +92,7 @@ const HistoryCards = ({ allAnalyzed }) => {
       </div>
     );
   });
-  return <div>{allCards}</div>;
+  return <div className="prev-cards">{allCards}</div>;
 };
 
 export default graphql(getHistories)(History);
