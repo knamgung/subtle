@@ -4,6 +4,7 @@ import P5Wrapper from "react-p5-wrapper";
 import Results from "./components/Results";
 import Sketch from "./sketches/sketch.js";
 import "./styles/App.css";
+import Main from "./components/Main";
 import History from "./components/History.js";
 import Navbar from "./components/Navbar";
 import Analyze from "./components/Analyze";
@@ -58,6 +59,13 @@ class App extends Component {
       <div className="App">
         <Navbar></Navbar>
         <Switch>
+          <Route
+            path="/"
+            exact
+            render={props => {
+              return <Main></Main>;
+            }}
+          ></Route>
           <Route
             path="/analyze"
             exact

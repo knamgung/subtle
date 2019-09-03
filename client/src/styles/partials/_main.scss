@@ -1,0 +1,102 @@
+@import "./color.scss";
+@import "./fonts.scss";
+@import "./variables.scss";
+
+.stack {
+  display: flex;
+  flex-flow: column;
+  &__card {
+    width: 100%;
+    border: $subtle-blue 6px solid;
+    padding: 0 2em;
+    border-radius: 1em;
+    margin: 1em 0;
+    box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  &__title {
+    font-family: "gotham";
+  }
+
+  &__icon {
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 4em;
+    width: 30%;
+    margin-left: 1em;
+    margin-right: 1em;
+    align-items: center;
+  }
+
+  &__desc {
+    margin: 0;
+    margin-top: 0.9em;
+    font-weight: 100;
+    font-size: 0.9em;
+    font-family: "gotham";
+  }
+
+  &__each {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+
+    align-items: baseline;
+  }
+  &__img {
+    width: 60px;
+    padding-bottom: 0.9em;
+    border-bottom: 1px solid lightgray;
+  }
+}
+
+.main {
+  &__content {
+    padding: 0 $padding-phone;
+  }
+
+  &__title {
+    font-weight: 800;
+  }
+
+  &__demo {
+    display: flex;
+    width: 100%;
+    flex-flow: column;
+    align-items: center;
+    border-top: lightgray 1px solid;
+    border-bottom: lightgray 1px solid;
+    padding: 0 2em;
+
+    margin: 1em 0;
+
+    & canvas {
+      margin-bottom: 2em;
+      border: 3px solid $subtle-blue;
+      border-radius: 0.5em;
+    }
+  }
+}
+
+.back-end {
+  border-color: rgba($color: #ff9595, $alpha: 1);
+
+  &--title {
+    color: rgba($color: #ff9595, $alpha: 1);
+  }
+  &--desc {
+    color: rgba($color: #ff9595, $alpha: 1);
+    text-shadow: 4px 4px 17px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.front-end {
+  &--title {
+    color: $subtle-blue;
+  }
+
+  &--desc {
+    color: $subtle-blue;
+    text-shadow: 4px 4px 17px rgba(0, 0, 0, 0.2);
+  }
+}
