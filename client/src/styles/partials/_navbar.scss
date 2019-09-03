@@ -1,0 +1,69 @@
+@import "./color.scss";
+@import "./fonts.scss";
+@import "./variables.scss";
+.nav {
+  background-color: $subtle-blue;
+  font-family: "gotham";
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5em;
+  padding: 0 $padding-phone;
+
+  &__logo {
+    width: 100px;
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+  }
+
+  &__link {
+    margin: 0;
+    font-size: 0.9em;
+    color: $inactive;
+    letter-spacing: 0.1em;
+
+    &:hover {
+      transition: 0.2s;
+      color: white;
+    }
+  }
+
+  &__profile {
+    width: 30px;
+    fill: $inactive;
+
+    &:hover {
+      transition: 0.2s;
+      fill: white;
+    }
+  }
+}
+
+.is-active h3 {
+  color: white;
+  fill: white;
+}
+
+.is-active-logo svg {
+  fill: white;
+}
+
+@media screen and (min-width: $mediaTablet) {
+  .nav {
+    padding: 0 $padding-tablet;
+    &__links {
+      width: 30%;
+    }
+  }
+}
+
+@media screen and (min-width: $mediaDesktop) {
+  .nav {
+    padding: 0 $padding-desktop;
+  }
+}
