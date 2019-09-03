@@ -6,6 +6,7 @@
   "dependencies": {
     "apollo-server-express": "^2.9.2",
     "body-parser": "^1.19.0",
+    "concurrently": "^4.1.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
@@ -15,7 +16,9 @@
     "mysql": "^2.17.1"
   },
   "scripts": {
-    "server": "nodemon src/index.js"
+    "server": "nodemon src/index.js",
+    "client": "npm start --prefix ./../client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "devDependencies": {
     "nodemon": "^1.19.1"

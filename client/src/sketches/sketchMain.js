@@ -111,9 +111,9 @@ export default function sketch(p) {
         let keypoint = pose.keypoints[j];
         // Only draw an ellipse is the pose probability is bigger than 0.2
         if (keypoint.score > 0.2) {
-          p.fill(255);
-          p.stroke(20);
-          p.strokeWeight(4);
+          p.fill(0);
+          p.stroke(255);
+          p.strokeWeight(2);
           p.ellipse(
             p.round(keypoint.position.x - 125),
             p.round(keypoint.position.y),
@@ -134,7 +134,7 @@ export default function sketch(p) {
         let partA = skeleton[j][0];
         let partB = skeleton[j][1];
         p.stroke(0);
-        p.strokeWeight(15);
+        p.strokeWeight(3);
         p.line(
           partA.position.x - 125,
           partA.position.y,

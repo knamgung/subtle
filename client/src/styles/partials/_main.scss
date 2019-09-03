@@ -2,20 +2,69 @@
 @import "./fonts.scss";
 @import "./variables.scss";
 
+.navMain {
+  font-family: "gotham";
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5em;
+  padding: 0 $padding-phone;
+
+  &__logo {
+    width: 100px;
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+  }
+
+  &__link {
+    margin: 0;
+    font-size: 0.9em;
+    color: $inactive;
+    letter-spacing: 0.1em;
+
+    &:hover {
+      transition: 0.2s;
+      color: white;
+    }
+  }
+
+  &__profile {
+    width: 30px;
+    fill: $inactive;
+
+    &:hover {
+      transition: 0.2s;
+      fill: white;
+    }
+  }
+}
+
 .stack {
   display: flex;
   flex-flow: column;
   &__card {
     width: 100%;
-    border: $subtle-blue 6px solid;
+    border: $subtle-blue 2px solid;
     padding: 0 2em;
-    border-radius: 1em;
+    border-radius: 0.2em;
     margin: 1em 0;
     box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.2);
+    &:hover {
+      transition: 0.5s;
+      transform: scale(1.05);
+    }
   }
 
   &__title {
-    font-family: "gotham";
+    font-family: "sfPro";
   }
 
   &__icon {
@@ -56,7 +105,60 @@
   }
 
   &__title {
+    margin-top: 2em;
     font-weight: 800;
+  }
+
+  &__hero {
+    width: 100%;
+    height: 30em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    background-image: url("../assets/hero.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    &--logo {
+      width: 8em;
+      margin-left: 3em;
+      margin-top: 5em;
+      background-color: white;
+      height: 13em;
+      width: 9em;
+      color: white;
+
+      & p {
+        font-size: 0.8em;
+        color: black;
+        font-weight: 300;
+        margin-left: 12px;
+      }
+
+      & h3 {
+        color: rgb(130, 130, 2);
+        font-weight: 800;
+        font-size: 1.5em;
+        margin-left: 12px;
+      }
+    }
+  }
+
+  &__button {
+    width: 100%;
+    font-family: "gotham";
+    color: white;
+    background-color: $subtle-blue;
+    font-size: 1.2em;
+    margin: 2em 0 6em 0;
+    height: 4em;
+    border: none;
+    &:hover {
+      transition: 0.5s;
+      background-color: rgb(105, 105, 255);
+    }
   }
 
   &__demo {
@@ -64,17 +166,55 @@
     width: 100%;
     flex-flow: column;
     align-items: center;
-    border-top: lightgray 1px solid;
+
     border-bottom: lightgray 1px solid;
     padding: 0 2em;
 
     margin: 1em 0;
 
+    &--title {
+      font-size: 0.9em;
+    }
     & canvas {
       margin-bottom: 2em;
       border: 3px solid $subtle-blue;
       border-radius: 0.5em;
     }
+  }
+}
+
+.how {
+  &__steps {
+    display: flex;
+    flex-flow: column;
+  }
+  &__icon {
+    width: 3em;
+    margin-right: 5em;
+  }
+
+  &__sub {
+    margin: 0;
+    margin-top: 1.5em;
+    font-size: 0.8em;
+  }
+
+  &__desc {
+    margin-bottom: 1.5em;
+    font-size: 0.75em;
+  }
+
+  &__text {
+    display: flex;
+    flex-flow: column;
+
+    text-align: right;
+  }
+
+  &__card {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid lightgrey;
   }
 }
 
@@ -98,5 +238,102 @@
   &--desc {
     color: $subtle-blue;
     text-shadow: 4px 4px 17px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media screen and (min-width: $mediaTablet) {
+  .navMain {
+    padding: 0 $padding-tablet;
+    &__links {
+      width: 30%;
+    }
+  }
+
+  .main {
+    padding: 0 $padding-tablet;
+
+    &__content {
+      padding: 0;
+    }
+    &__hero {
+      height: 35em;
+      &--logo {
+        margin-left: 14em;
+      }
+    }
+
+    &__start {
+      display: flex;
+
+      justify-content: flex-end;
+    }
+
+    &__button {
+      width: 15em;
+    }
+  }
+
+  .how {
+    &__steps {
+      margin: 4em 0 1em 0;
+      flex-flow: row;
+      justify-content: space-around;
+      width: 100%;
+    }
+
+    &__icon {
+      margin-right: 0;
+    }
+
+    &__desc {
+      text-align: center;
+    }
+
+    &__sub {
+      text-align: center;
+    }
+
+    &__card {
+      flex-flow: column;
+      align-items: center;
+    }
+  }
+
+  .stack {
+    &__each {
+      flex-flow: nowrap;
+    }
+  }
+}
+
+@media screen and (min-width: $mediaDesktop) {
+  .navMain {
+    padding: 0 $padding-desktop;
+  }
+
+  .main {
+    padding: 0 $padding-desktop;
+
+    &__hero {
+      &--logo {
+        margin-left: 18em;
+      }
+    }
+
+    &__start {
+      justify-content: center;
+      margin-top: 4em;
+    }
+  }
+
+  .stack {
+    &__card {
+      width: 48%;
+    }
+
+    &__allCards {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }

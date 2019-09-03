@@ -235,7 +235,14 @@ const SaveButtons = ({
   console.log(editedResource);
   return (
     <div className="button">
-      <button className="button__cancel">Cancel</button>
+      <button
+        className="button__cancel"
+        onClick={() => {
+          history.push("analyze");
+        }}
+      >
+        Cancel
+      </button>
       <button
         className="button__save"
         onClick={e => {

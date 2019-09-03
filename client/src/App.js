@@ -57,15 +57,20 @@ class App extends Component {
     console.log(this.props);
     return (
       <div className="App">
-        <Navbar></Navbar>
         <Switch>
           <Route
             path="/"
             exact
             render={props => {
-              return <Main></Main>;
+              return (
+                <div>
+                  <Navbar whichPage={false}></Navbar>
+                  <Main></Main>
+                </div>
+              );
             }}
           ></Route>
+
           <Route
             path="/analyze"
             exact
@@ -73,16 +78,22 @@ class App extends Component {
               return (
                 <div>
                   {analyzing ? (
-                    <Sketch
-                      pics={pics}
-                      history={props.history}
-                      sketchedImage={this.sketchedImage}
-                    ></Sketch>
+                    <div>
+                      <Navbar whichPage={true}></Navbar>
+                      <Sketch
+                        pics={pics}
+                        history={props.history}
+                        sketchedImage={this.sketchedImage}
+                      ></Sketch>
+                    </div>
                   ) : (
-                    <Analyze
-                      sketchThis={this.sketchThis}
-                      startAnalyzing={this.startAnalyzing}
-                    ></Analyze>
+                    <div>
+                      <Navbar whichPage={true}></Navbar>{" "}
+                      <Analyze
+                        sketchThis={this.sketchThis}
+                        startAnalyzing={this.startAnalyzing}
+                      ></Analyze>
+                    </div>
                   )}
                 </div>
               );
@@ -91,18 +102,26 @@ class App extends Component {
           <Route
             path="/history"
             render={props => {
-              return <History allAnalyzed={allAnalyzed} {...props}></History>;
+              return (
+                <div>
+                  <Navbar whichPage={true}></Navbar>{" "}
+                  <History allAnalyzed={allAnalyzed} {...props}></History>
+                </div>
+              );
             }}
           ></Route>
           <Route
             path="/results"
             render={props => {
               return (
-                <Results
-                  picHistory={picHistory}
-                  saveAnalysis={this.saveAnalysis}
-                  {...props}
-                ></Results>
+                <div>
+                  <Navbar whichPage={true}></Navbar>{" "}
+                  <Results
+                    picHistory={picHistory}
+                    saveAnalysis={this.saveAnalysis}
+                    {...props}
+                  ></Results>
+                </div>
               );
             }}
           ></Route>
