@@ -1,7 +1,7 @@
 # subtle
 
 
-![Upload](https://github.com/knamgung/subtle/tree/master/client/src/assets/logo/white-logo-0201.png "Logo")
+![Upload](https://github.com/knamgung/subtle/raw/tree/master/client/src/assets/logo/white-logo-0201.png "Logo")
 ![Analyze](https://github.com/knamgung/subtle/tree/master/client/src/assets/icons/analyze.svg)
 ![done](https://github.com/knamgung/subtle/tree/master/client/src/assets/icons/checkmark.svg)
 
