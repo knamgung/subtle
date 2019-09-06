@@ -10,10 +10,23 @@ Subtle is an application where it detects the shots (e.g. Upper Body Shot, Face 
 
 First clone or download Subtle
 
-In the Subtle directory
 ```
 cd server
 yarn dev
-
 ```
 
+
+### Stacks Used
+
+#### Front-End
+* Apollo
+* ml5.js
+* p5.js
+* React.js
+* tensorflow.js
+
+#### Back-End
+* express
+* graphQL
+* mongoose
+* mongoDB
