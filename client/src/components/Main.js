@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "../assets/logos/blue-logo-01.svg";
 import sketch from "../sketches/sketchMain";
 import P5Wrapper from "react-p5-wrapper";
 import { Link } from "react-router-dom";
@@ -36,6 +35,7 @@ export default class Main extends Component {
 
             <P5Wrapper sketch={sketch}></P5Wrapper>
           </div>
+
           <StackCards></StackCards>
           <div className="main__start">
             <Link to="/analyze">
@@ -51,10 +51,10 @@ export default class Main extends Component {
 const HowItWorks = () => {
   return (
     <div className="how">
-      <h2 className="how__title main__title">How To Use</h2>
+      <h2 className="how__title main__title">How Subtle Works</h2>
       <div className="how__steps">
         <div className="how__card">
-          <img src={upload} className="how__icon" />
+          <img src={upload} className="how__icon" alt="upload__icon" />
           <div className="how__text">
             <h5 className="how__sub">Upload Photos</h5>
             <p className="how__desc">
@@ -65,7 +65,7 @@ const HowItWorks = () => {
           </div>
         </div>
         <div className="how__card">
-          <img src={analyze} className="how__icon" />
+          <img src={analyze} className="how__icon" alt="analyze__icon" />
           <div className="how__text">
             <h5 className="how__sub">Analyze</h5>
             <p className="how__desc">
@@ -77,7 +77,7 @@ const HowItWorks = () => {
         </div>
 
         <div className="how__card">
-          <img src={checkmark} className="how__icon" />
+          <img src={checkmark} className="how__icon" alt="checkmark__icon" />
           <div className="how__text">
             <h5 className="how__sub">Done!</h5>
             <p className="how__desc">
@@ -101,23 +101,27 @@ const StackCards = () => {
           <h2 className="stack__title front-end--title">Front End</h2>
           <div className="stack__each">
             <div className="stack__icon apollo">
-              <img src={apollo} className="stack__img"></img>
+              <img src={apollo} className="stack__img" alt="stack-apollo"></img>
               <h5 className="stack__desc front-end--desc">Apollo</h5>
             </div>
             <div className="stack__icon ml5">
-              <img src={ml5} className="stack__img"></img>
+              <img src={ml5} className="stack__img" alt="stack-ml5"></img>
               <h5 className="stack__desc front-end--desc">ml5.js</h5>
             </div>
             <div className="stack__icon p5">
-              <img src={p5} className="stack__img"></img>
+              <img src={p5} className="stack__img" alt="stack-p5"></img>
               <h5 className="stack__desc front-end--desc">p5.js</h5>
             </div>
             <div className="stack__icon react">
-              <img src={react} className="stack__img"></img>
+              <img src={react} className="stack__img" alt="stack-react"></img>
               <h5 className="stack__desc front-end--desc">React</h5>
             </div>
             <div className="stack__icon tensorflow">
-              <img src={tensorflow} className="stack__img"></img>
+              <img
+                src={tensorflow}
+                className="stack__img"
+                alt="stack-tensorflow"
+              ></img>
               <h5 className="stack__desc front-end--desc">TensorFlow.js</h5>
             </div>
           </div>
@@ -126,19 +130,35 @@ const StackCards = () => {
           <h2 className="stack__title back-end--title">Back End</h2>
           <div className="stack__each">
             <div className="stack__icon express">
-              <img src={express} className="stack__img"></img>
+              <img
+                src={express}
+                className="stack__img"
+                alt="stack-express"
+              ></img>
               <h5 className="stack__desc back-end--desc">express.js</h5>
             </div>
             <div className="stack__icon graphql">
-              <img src={graphql} className="stack__img"></img>
+              <img
+                src={graphql}
+                className="stack__img"
+                alt="stack-graphql"
+              ></img>
               <h5 className="stack__desc back-end--desc">GraphQL</h5>
             </div>
             <div className="stack__icon mongodb">
-              <img src={mongodb} className="stack__img"></img>
+              <img
+                src={mongodb}
+                className="stack__img"
+                alt="stack-mongoDB"
+              ></img>
               <h5 className="stack__desc back-end--desc">MongoDB</h5>
             </div>
             <div className="stack__icon mongoose">
-              <img src={mongoose} className="stack__img"></img>
+              <img
+                src={mongoose}
+                className="stack__img"
+                alt="stack-mongoose"
+              ></img>
               <h5 className="stack__desc back-end--desc">Mongoose</h5>
             </div>
           </div>

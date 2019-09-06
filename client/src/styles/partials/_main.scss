@@ -215,6 +215,11 @@
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid lightgrey;
+
+    &:hover .how__icon {
+      transition: 0.5s;
+      transform: translateY(-1em);
+    }
   }
 }
 
@@ -271,6 +276,10 @@
     &__button {
       width: 15em;
     }
+
+    &__demo {
+      margin-top: 3em;
+    }
   }
 
   .how {
@@ -315,6 +324,7 @@
     padding: 0 $padding-desktop;
 
     &__hero {
+      height: 40em;
       &--logo {
         margin-left: 18em;
       }

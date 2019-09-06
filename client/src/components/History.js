@@ -1,18 +1,24 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import { getHistories } from "../queries/queries";
+import historyLoad from "../assets/gifs/historyLoad.gif";
 
 class History extends Component {
   render() {
     let {
-      saveAnalysis,
-      allAnalyzed,
       data: { loading, error, histories }
     } = this.props;
-    console.log(this.props);
 
     if (loading) {
-      return <h5>Loading</h5>;
+      return (
+        <div className="process__div">
+          <img
+            className="process__gif"
+            src={historyLoad}
+            alt="loading-gif"
+          ></img>
+        </div>
+      );
     }
     if (error) {
       return <h5>Error</h5>;
@@ -34,26 +40,6 @@ class History extends Component {
 
 const HistoryCards = ({ allAnalyzed }) => {
   let allCards = allAnalyzed.map(hist => {
-    console.log(hist);
-    let fullCount = hist.resource.filter(info => {
-      return info.resultValue === "fullBody";
-    }).length;
-    let upperCount = hist.resource.filter(info => {
-      return info.resultValue === "upperBody";
-    }).length;
-    let faceCount = hist.resource.filter(info => {
-      return info.resultValue === "faceShot";
-    }).length;
-    let facelessCount = hist.resource.filter(info => {
-      return info.resultValue === "facelessFullBody";
-    }).length;
-    let midCount = hist.resource.filter(info => {
-      return info.resultValue === "midBody";
-    }).length;
-    let lowerCount = hist.resource.filter(info => {
-      return info.resultValue === "lowerBody";
-    }).length;
-
     let renderResults = info => {
       let partInfo = hist.resource.filter(obj => {
         return obj.resultValue === info;
@@ -71,7 +57,7 @@ const HistoryCards = ({ allAnalyzed }) => {
     };
 
     return (
-      <div className="prev">
+      <div className="prev" key={hist.title}>
         <div className="prev__header">
           <h5 className="prev__title">
             {hist.title} | {hist.resource.length} Photos

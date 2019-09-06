@@ -8,15 +8,13 @@ export default class Analyze extends Component {
   };
 
   onDrop = pictures => {
-    console.log(pictures);
     let newPictures = [];
-    let picProcessed = 0;
+
     this.setState({
       load: true
     });
 
     pictures.forEach((picture, index) => {
-      console.log(picProcessed, pictures.length);
       var reader = new FileReader();
       reader.onloadend = function() {
         let newImage = {
@@ -84,11 +82,11 @@ export default class Analyze extends Component {
 class PhotoSet extends Component {
   render() {
     let { pictures } = this.props;
-    let renderPhoto = pictures.map(pic => {
-      console.log(pic);
+    let renderPhoto = pictures.map((pic, i) => {
       return (
         <div
           className="photo__card"
+          key={i}
           style={{
             backgroundImage: `url(${pic.imgSrc})`
           }}

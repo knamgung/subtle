@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import P5Wrapper from "react-p5-wrapper";
+
 import Results from "./components/Results";
 import Sketch from "./sketches/sketch.js";
 import "./styles/App.css";
@@ -9,8 +8,6 @@ import History from "./components/History.js";
 import Navbar from "./components/Navbar";
 import Analyze from "./components/Analyze";
 import { Route, Switch } from "react-router-dom";
-import { graphql } from "react-apollo";
-import { getHistoryQuery, getHistories } from "./queries/queries";
 
 class App extends Component {
   state = {
@@ -27,7 +24,6 @@ class App extends Component {
   };
 
   sketchedImage = (picHistory, history) => {
-    console.log(history);
     this.setState(
       {
         picHistory,
@@ -53,8 +49,7 @@ class App extends Component {
 
   render() {
     let { pics, picHistory, analyzing, allAnalyzed } = this.state;
-    console.log("PICA", pics, picHistory);
-    console.log(this.props);
+
     return (
       <div className="App">
         <Switch>

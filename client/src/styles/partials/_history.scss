@@ -5,6 +5,7 @@
 .history {
   padding: 0 $padding-phone;
   &__title {
+    margin-top: 4em;
     border-bottom: lightgray solid 1px;
     margin-bottom: 2em;
   }
@@ -169,6 +170,12 @@
       height: 60px;
     }
   }
+
+  .prev {
+    &__header {
+      width: 50%;
+    }
+  }
 }
 
 @media screen and (min-width: $mediaDesktop) {
@@ -183,6 +190,10 @@
 
   .prev {
     width: 48%;
+
+    &__header {
+      width: 90%;
+    }
   }
 
   .summary {

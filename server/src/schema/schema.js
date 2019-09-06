@@ -183,8 +183,6 @@ const RootQuery = new GraphQLObjectType({
       type: User,
       args: { userId: { type: new GraphQLNonNull(GraphQLString) } },
       resolve(parent, args) {
-        console.log(args.userId);
-
         return UsersDB.find(args.userId);
       }
     }
@@ -237,7 +235,7 @@ const Mutation = new GraphQLObjectType({
         let formatDate = `${
           months[newDate.getMonth()]
         }. ${newDate.getDate()} / ${newDate.getFullYear()}`;
-        console.log(formatDate);
+
         args.resource.map((img, i) => {
           let resource = new Images({
             resultValue: img.resultValue,
@@ -254,8 +252,6 @@ const Mutation = new GraphQLObjectType({
           date: formatDate,
           resources: args.resource
         });
-
-        console.log(args.resource);
 
         return history.save();
       }

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { graphql, compose } from "react-apollo";
+import { graphql } from "react-apollo";
 import { addHistory, getHistories } from "../queries/queries";
 import _ from "lodash";
+import loadingResult from "../assets/gifs/loadingResult.gif";
 
 class Results extends Component {
   state = {
@@ -20,12 +21,20 @@ class Results extends Component {
     let { title } = this.state;
 
     if (data.loading) {
-      return <h5>Loading</h5>;
+      return (
+        <div className="process__div">
+          <img
+            className="process__gif"
+            src={loadingResult}
+            alt="loading-gif"
+          ></img>
+        </div>
+      );
     }
     if (data.error) {
       return <h5>Error</h5>;
     }
-    console.log(title);
+
     return (
       <div>
         {picHistory ? (
@@ -42,7 +51,7 @@ class Results extends Component {
             <SaveButtons
               picHistory={picHistory}
               saveAnalysis={saveAnalysis}
-              title={this.state.title}
+              title={title}
               addHistory={addHistory}
               history={this.props.history}
               historyData={data}
@@ -70,52 +79,26 @@ const ResultSet = ({ picHistory, setTitle, historyData }) => {
   picHistory.forEach(pic => {
     bodyParts[pic.resultValue].push(pic);
   });
-  // let fullBody = picHistory.filter(pic => {
-  //   return pic.result === "Full Body";
-  // });
-
-  // let faceShot = picHistory.filter(pic => {
-  //   return pic.result === "Face Shot";
-  // });
-
-  // let upperBody = picHistory.filter(pic => {
-  //   return pic.result === "Upper Body";
-  // });
-
-  // let facelessFullBody = picHistory.filter(pic => {
-  //   return pic.result === "Faceless Full Body";
-  // });
-
-  // let midBody = picHistory.filter(pic => {
-  //   return pic.result === "Mid Body";
-  // });
-
-  // let lowerBody = picHistory.filter(pic => {
-  //   return pic.result === "Lower Body";
-  // });
-
-  // let undetect = picHistory.filter(pic => {
-  //   return pic.result === "Undetectable";
-  // });
-  console.log(bodyParts);
 
   let renderResults = pics =>
-    pics.map(pic => {
+    pics.map((pic, i) => {
       return (
         <div
           className="results__card"
+          key={i}
           style={{
             backgroundImage: `url(${pic.imgSrc})`
           }}
         >
           <div className="results__img">
-            <img src={`./assets/body-part/${pic.resultValue}.png`}></img>
+            <img
+              src={`./assets/body-part/${pic.resultValue}.png`}
+              alt={pic.result}
+            ></img>
           </div>
         </div>
       );
     });
-
-  console.log(bodyParts["midBody"].length);
 
   return (
     <div className="result__final">
@@ -224,7 +207,7 @@ const SaveButtons = ({
   historyData
 }) => {
   let editedResource = [];
-  let newPic = picHistory.forEach(obj => {
+  picHistory.forEach(obj => {
     let results = {
       resultValue: obj.resultValue,
       result: obj.result
@@ -232,7 +215,6 @@ const SaveButtons = ({
     return editedResource.push(results);
   });
 
-  console.log(editedResource);
   return (
     <div className="button">
       <button
@@ -254,7 +236,6 @@ const SaveButtons = ({
             }
           });
 
-          console.log(mapBool);
           if (mapBool.indexOf(true) > -1) {
             alert("Username already Taken");
             e.target.value = "";
@@ -278,32 +259,6 @@ const SaveButtons = ({
     </div>
   );
 };
-
-// const SaveButtons = ({ picHistory, saveAnalysis, title }) => {
-//   return (
-//     <Mutation mutation={addHistory}>
-//       {(addResult, { data }) => {
-//         console.log(addResult);
-//         return (
-//           <div className="button">
-//             <button className="button__cancel">Cancel</button>
-//             <button
-//               className="button__save"
-//               onClick={() => {
-//                 console.log(title, picHistory);
-//                 addResult({
-//                   variables: { userId: "1", title: title, resource: picHistory }
-//                 });
-//               }}
-//             >
-//               Save!
-//             </button>
-//           </div>
-//         );
-//       }}
-//     </Mutation>
-//   );
-// };
 
 export default _.flowRight(
   graphql(addHistory, { name: "addHistory" }),
