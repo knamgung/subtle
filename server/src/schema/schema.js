@@ -22,49 +22,6 @@ const {
   GraphQLInputObjectType
 } = graphql;
 
-var history = [
-  {
-    title: "Untitled",
-    date: "Sept 5",
-    userId: "1"
-  },
-  {
-    title: "History",
-    date: "Sept 5",
-    userId: "1"
-  },
-  {
-    title: "History",
-    date: "Sept 5",
-    userId: "2"
-  }
-];
-
-var images = [
-  {
-    imgSrc: "src",
-    resultValue: "RV",
-    result: "result",
-    image: "ah",
-    userId: "1",
-    title: "Untitled"
-  },
-  {
-    imgSrc: "1",
-    resultValue: "RV",
-    result: "result",
-    image: "ah",
-    historyId: "1",
-    title: "History"
-  }
-];
-
-var users = [
-  {
-    userId: "1"
-  }
-];
-
 const HistoryType = new GraphQLObjectType({
   name: "history",
   fields: () => ({
@@ -145,25 +102,9 @@ const InputImgSrcType = new GraphQLInputObjectType({
   })
 });
 
-//RootQuery describe how users can use the graph and grab data.
-//E.g Root query to get all authors, get all books, get a particular book
-//or get a particular author.
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
-    // User: {
-    //   type: User,
-    //   args: {
-    //     userId: { type: GraphQLID }
-    //   },
-    //   resolve(parent, args) {
-    //     //Here we define how to get data from database source
-
-    //     //this will return the book with id passed in argument by the user
-    //     return Users.find({ userId: args.userId });
-    //   }
-    // }
-
     allHistory: {
       type: GraphQLList(HistoryType),
       args: { userId: { type: new GraphQLNonNull(GraphQLString) } },
@@ -259,8 +200,6 @@ const Mutation = new GraphQLObjectType({
   }
 });
 
-//Creating a new GraphQL Schema, with options query which defines query
-//we will allow users to use when they are making request.
 module.exports = new GraphQLSchema({
   query: RootQuery,
   mutation: Mutation
