@@ -10,6 +10,8 @@ Subtle is an application where it detects the shots (e.g. Upper Body Shot, Face 
 
 ### Use Subtle
 
+![](https://github.com/knamgung/subtle/blob/master/client/src/assets/gifs/1.gif)
+
 First clone or download Subtle
 
 ```
