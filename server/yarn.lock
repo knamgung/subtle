@@ -590,9 +590,9 @@ braces@^2.3.1, braces@^2.3.2:
     to-regex "^3.0.1"
 
 bson@^1.1.1, bson@~1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/bson/-/bson-1.1.1.tgz#4330f5e99104c4e751e7351859e2d408279f2f13"
-  integrity sha512-jCGVYLoYMHDkOsbwJZBCqwMHyH4c+wzgI9hG7Z6SZJRXWr+x58pdIbm2i9a/jFGCkRJqRUr8eoI7lDWa0hTkxg==
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/bson/-/bson-1.1.6.tgz#fb819be9a60cd677e0853aee4ca712a785d6618a"
+  integrity sha512-EvVNVeGo4tHxwi8L6bPj3y3itEvStdwvvlojVxxbyYfoaxJ6keLgrTuKdyfEAszFK+H3olzBuafE0yoh0D1gdg==
 
 busboy@^0.3.1:
   version "0.3.1"
@@ -732,16 +732,6 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
-
-concurrency@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/concurrency/-/concurrency-0.1.4.tgz#32b4590b5b39941a4d739daf5d6a10080c2cf31f"
-  integrity sha1-MrRZC1s5lBpNc52vXWoQCAws8x8=
-
-concurrent@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/concurrent/-/concurrent-0.3.2.tgz#0eaa0011a15798c56351128f22247f6e2317f50e"
-  integrity sha1-DqoAEaFXmMVjURKPIiR/biMX9Q4=
 
 concurrently@^4.1.2:
   version "4.1.2"
